@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Resume</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 min-h-screen flex items-center justify-center">
+    <div class="bg-white p-10 rounded-3xl shadow-2xl w-full max-w-2xl">
+        <h1 class="text-4xl font-bold mb-6 text-red-600 text-center">Upload Your Resume</h1>
+        <p class="mb-8 text-gray-700 text-lg text-center">Get job recommendations based on your resume</p>
+
+        <form action="{{ url_for('upload_resume') }}" method="POST" enctype="multipart/form-data">
+            <div class="mb-4">
+                <label for="resume" class="block text-lg font-semibold text-gray-700">Select Resume (PDF)</label>
+                <input type="file" name="resume" id="resume" accept=".pdf" required class="mt-2 block w-full text-sm text-gray-700 bg-gray-200 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+            </div>
+
+            <div class="text-center mb-4">
+                <button type="submit" class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full text-lg transition">
+                    Upload Resume
+                </button>
+            </div>
+        </form>
+
+        {% if skills %}
+        <div class="mt-8 text-center">
+            <h2 class="text-xl font-bold text-gray-700">Skills Found:</h2>
+            <ul class="list-disc list-inside mt-4 text-gray-600">
+                {% for skill in skills %}
+                <li>{{ skill }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <!-- New Buttons Below -->
+        <div class="mt-10 text-center space-y-4">
+            <a href="{{ url_for('show_recommendations') }}">
+                <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full transition">
+                    View Job Recommendations
+                </button>
+            </a>
+            <br>
+            <a href="{{ url_for('resume_builder') }}">
+                <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition">
+                    Create Resume with Resume Builder
+                </button>
+            </a>
+        </div>
+
+    </div>
+</body>
+</html>

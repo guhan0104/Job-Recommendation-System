@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Job Recommendations</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans">
+    <div class="max-w-4xl mx-auto py-10 px-6">
+        <h1 class="text-3xl font-bold mb-6 text-center">👋 Hello {{ user }}!</h1>
+        <h2 class="text-xl font-semibold mb-4 text-center">Here are your recommended jobs:</h2>
+
+        {% if jobs %}
+            <div class="space-y-4">
+                {% for job in jobs %}
+                <div class="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition">
+                    <h3 class="text-lg font-semibold text-blue-600">{{ job['role'] }}</h3>
+                    <p class="mt-1 text-gray-700">
+                        Company:
+                        <a href="{{ company_links[job['company']] }}" class="text-indigo-500 hover:underline" target="_blank">
+                            {{ job['company'] }}
+                        </a>
+                    </p>
+                    <p class="mt-1 text-gray-500">Location: {{ job.get('location', 'Tamil Nadu') }}</p>
+                    <p class="mt-1 text-green-600 font-medium">Salary: ₹{{ job.get('salary', 'Not specified') }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-center text-red-500 font-semibold">No job recommendations available right now.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
